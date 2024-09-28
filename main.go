@@ -47,7 +47,13 @@ func main() {
 	v1Router.Get("/persons/{name}", apiConf.handlerGetPersonByName)
 	v1Router.Delete("/persons/{name}", apiConf.handlerDeletePerson)
 
-	router.Mount("/v1", v1Router)
+	v1Router.Post("/courses", apiConf.handlerCreateCourse)
+	v1Router.Put("/courses/{id}", apiConf.handlerUpdateCourse)
+	v1Router.Get("/courses", apiConf.handlerGetCourses)
+	v1Router.Get("/courses/{id}", apiConf.handlerGetCourseById)
+	v1Router.Delete("/courses/{id}", apiConf.handlerDeleteCourse)
+
+	router.Mount("/api", v1Router)
 
 	server := &http.Server{
 		Handler: router,

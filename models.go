@@ -11,6 +11,11 @@ type Person struct {
 	Age       int32  `json:"age"`
 }
 
+type Course struct {
+	Id   int32  `json:"id"`
+	Name string `json:"name"`
+}
+
 func databasePersonToPerson(dbPerson database.Person) Person {
 	return Person{
 		FirstName: dbPerson.FirstName,
@@ -27,4 +32,20 @@ func databasePersonsToPersons(dbPersons []database.Person) []Person {
 	}
 
 	return persons
+}
+
+func databaseCourseToCourse(dbCourse database.Course) Course {
+	return Course{
+		Id:   dbCourse.ID,
+		Name: dbCourse.Name,
+	}
+}
+
+func databaseCoursesToCourses(dbCourses []database.Course) []Course {
+	courses := []Course{}
+	for _, dbCourse := range dbCourses {
+		courses = append(courses, databaseCourseToCourse(dbCourse))
+	}
+
+	return courses
 }
